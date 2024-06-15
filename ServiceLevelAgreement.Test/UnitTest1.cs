@@ -3,11 +3,11 @@ namespace ServiceLevelAgreement;
 public class UnitTest1
 {
     [Theory]
-    [InlineData("2024-05-25 09:00:00", "2024-05-26 18:00:00")]
-    [InlineData("2024-06-01 09:00:00", "2024-06-01 18:00:00")]
-    [InlineData("2024-06-02 09:00:00", "2024-06-02 18:00:00")]
-    [InlineData("2024-06-08 09:00:00", "2024-06-08 18:00:00")]
-    [InlineData("2024-06-09 09:00:00", "2024-06-09 18:00:00")]
+    [InlineData("2024-05-25 09:00:00", "2024-05-26 18:00:00")] // Weekend
+    [InlineData("2024-06-01 09:00:00", "2024-06-01 18:00:00")] // Weekend
+    [InlineData("2024-06-02 09:00:00", "2024-06-02 18:00:00")] // Weekend
+    [InlineData("2024-06-08 09:00:00", "2024-06-08 18:00:00")] // Weekend
+    [InlineData("2024-06-09 09:00:00", "2024-06-09 18:00:00")] // Weekend
     public void Should_Return_ZeroHour(DateTime start, DateTime end)
     {
         // Arrange
@@ -86,6 +86,23 @@ public class UnitTest1
     
         // Assert
         Assert.Equal(new TimeSpan(2, 0, 0), businessHours);
+    }
+    
+    [Theory]
+    [InlineData("2024-06-03 16:00:00", "2024-06-04 17:00:00")]
+    [InlineData("2024-06-04 16:00:00", "2024-06-05 17:00:00")]
+    [InlineData("2024-06-05 16:00:00", "2024-06-06 17:00:00")]
+    [InlineData("2024-06-06 16:00:00", "2024-06-07 17:00:00")]
+    [InlineData("2024-06-07 16:00:00", "2024-06-10 17:00:00")]
+    public void Should_Return_TenHours_When_StartDay_IsMinorThan_EndDay_And_StartDayHour_IsGreaterThan_EndDayHour(DateTime start, DateTime end)
+    {
+        // Arrange
+        
+        // Act
+        var businessHours = CalculateBusinessHours(start, end);
+    
+        // Assert
+        Assert.Equal(new TimeSpan(10, 0, 0), businessHours);
     }
     
     private TimeSpan CalculateBusinessHours(DateTime start, DateTime end)
