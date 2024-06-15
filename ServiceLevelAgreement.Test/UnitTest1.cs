@@ -1,4 +1,4 @@
-namespace CalculoSla;
+namespace ServiceLevelAgreement;
 
 public class UnitTest1
 {
