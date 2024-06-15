@@ -105,8 +105,24 @@ public class UnitTest1
         Assert.Equal(new TimeSpan(10, 0, 0), businessHours);
     }
     
+    [Theory]
+    [InlineData("2024-06-04 17:00:00", "2024-06-03 09:00:00")]
+    public void Should_Throw_ArgumentException_When_EndDate_IsMinorThan_StartDate(DateTime start, DateTime end)
+    {
+        // Arrange
+        
+        // Act
+        Action action = () => CalculateBusinessHours(start, end);
+    
+        // Assert
+        Assert.Throws<ArgumentException>(action);
+    }
+    
     private TimeSpan CalculateBusinessHours(DateTime start, DateTime end)
     {
+        if (start > end)
+            throw new ArgumentException("End date must be greater than start date");
+        
         var businessHours = new TimeSpan();
         var startHour = 0;
         var endHour = 0;
