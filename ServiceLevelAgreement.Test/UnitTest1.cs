@@ -88,7 +88,6 @@ public class UnitTest1
         Assert.Equal(new TimeSpan(2, 0, 0), businessHours);
     }
     
-    
     private TimeSpan CalculateBusinessHours(DateTime start, DateTime end)
     {
         var businessHours = new TimeSpan();
