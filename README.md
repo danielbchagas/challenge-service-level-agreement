@@ -1,2 +1,8 @@
-# challenge-service-level-agreement
-Daily work challenges
+# Service Level Agreement
+
+### Technology
+[C#](https://dotnet.microsoft.com/pt-br/languages/csharp)  
+[xUnit](https://xunit.net/)
+
+#### About
+This repository contains a solution for calculating Service Level Agreements (SLAs) within a flexible timeframe (typically 9:00 to 18:00) while considering only business days. The challenge involved accurately determining SLA durations while excluding weekends.
