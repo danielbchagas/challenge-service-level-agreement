@@ -3,71 +3,37 @@ namespace CalculoSla;
 public class UnitTest1
 {
     [Theory]
-    [InlineData("2024-06-03 10:00:00", "2024-06-04 17:00:00")]
-    [InlineData("2024-06-04 10:00:00", "2024-06-05 17:00:00")]
-    [InlineData("2024-06-05 10:00:00", "2024-06-06 17:00:00")]
-    [InlineData("2024-06-06 10:00:00", "2024-06-07 17:00:00")]
-    [InlineData("2024-06-07 10:00:00", "2024-06-10 17:00:00")]
-    public void Test1(DateTime start, DateTime end)
-    {
-        // Arrange
-        
-        // Act
-        var businessHours = CalculateBusinessHours(start, end);
-    
-        // Assert
-        Assert.Equal(new TimeSpan(16, 0, 0), businessHours);
-    }
-    
-    [Theory]
-    [InlineData("2024-06-03 09:00:00", "2024-06-04 18:00:00")]
-    [InlineData("2024-06-04 09:00:00", "2024-06-05 18:00:00")]
-    [InlineData("2024-06-05 09:00:00", "2024-06-06 18:00:00")]
-    [InlineData("2024-06-06 09:00:00", "2024-06-07 18:00:00")]
-    [InlineData("2024-06-07 09:00:00", "2024-06-10 18:00:00")]
-    public void Test2(DateTime start, DateTime end)
-    {
-        // Arrange
-        
-        // Act
-        var businessHours = CalculateBusinessHours(start, end);
-
-        // Assert
-        Assert.Equal(new TimeSpan(18, 0, 0), businessHours);
-    }
-    
-    [Theory]
-    [InlineData("2024-06-03 17:00:00", "2024-06-04 17:00:00")]
-    [InlineData("2024-06-04 17:00:00", "2024-06-05 17:00:00")]
-    [InlineData("2024-06-05 17:00:00", "2024-06-06 17:00:00")]
-    [InlineData("2024-06-06 17:00:00", "2024-06-07 17:00:00")]
-    [InlineData("2024-06-07 17:00:00", "2024-06-10 17:00:00")]
-    public void Test3(DateTime start, DateTime end)
-    {
-        // Arrange
-        
-        // Act
-        var businessHours = CalculateBusinessHours(start, end);
-
-        // Assert
-        Assert.Equal(new TimeSpan(2, 0, 0), businessHours);
-    }
-    
-    [Theory]
     [InlineData("2024-05-25 09:00:00", "2024-05-26 18:00:00")]
     [InlineData("2024-06-01 09:00:00", "2024-06-01 18:00:00")]
     [InlineData("2024-06-02 09:00:00", "2024-06-02 18:00:00")]
     [InlineData("2024-06-08 09:00:00", "2024-06-08 18:00:00")]
     [InlineData("2024-06-09 09:00:00", "2024-06-09 18:00:00")]
-    public void Test4(DateTime start, DateTime end)
+    public void Should_Return_ZeroHour(DateTime start, DateTime end)
     {
         // Arrange
         
         // Act
         var businessHours = CalculateBusinessHours(start, end);
-
+    
         // Assert
         Assert.Equal(new TimeSpan(0, 0, 0), businessHours);
+    }
+    
+    [Theory]
+    [InlineData("2024-06-03 09:00:00", "2024-06-03 10:00:00")]
+    [InlineData("2024-06-04 09:00:00", "2024-06-04 10:00:00")]
+    [InlineData("2024-06-05 09:00:00", "2024-06-05 10:00:00")]
+    [InlineData("2024-06-06 09:00:00", "2024-06-06 10:00:00")]
+    [InlineData("2024-06-07 09:00:00", "2024-06-07 10:00:00")]
+    public void Should_Return_OneHour(DateTime start, DateTime end)
+    {
+        // Arrange
+        
+        // Act
+        var businessHours = CalculateBusinessHours(start, end);
+    
+        // Assert
+        Assert.Equal(new TimeSpan(1, 0, 0), businessHours);
     }
     
     [Theory]
@@ -76,16 +42,52 @@ public class UnitTest1
     [InlineData("2024-06-05 09:00:00", "2024-06-05 18:00:00")]
     [InlineData("2024-06-06 09:00:00", "2024-06-06 18:00:00")]
     [InlineData("2024-06-07 09:00:00", "2024-06-07 18:00:00")]
-    public void Test5(DateTime start, DateTime end)
+    public void Should_Return_NineHours(DateTime start, DateTime end)
     {
         // Arrange
         
         // Act
         var businessHours = CalculateBusinessHours(start, end);
-
+    
         // Assert
-        Assert.Equal(new TimeSpan(9, 0, 0), businessHours);
+        Assert.Equal(new TimeSpan(09, 0, 0), businessHours);
     }
+    
+    [Theory]
+    [InlineData("2024-06-03 09:00:00", "2024-06-04 18:00:00")]
+    [InlineData("2024-06-04 09:00:00", "2024-06-05 18:00:00")]
+    [InlineData("2024-06-05 09:00:00", "2024-06-06 18:00:00")]
+    [InlineData("2024-06-06 09:00:00", "2024-06-07 18:00:00")]
+    [InlineData("2024-06-07 09:00:00", "2024-06-10 18:00:00")]
+    public void Should_Return_EighteenHours(DateTime start, DateTime end)
+    {
+        // Arrange
+        
+        // Act
+        var businessHours = CalculateBusinessHours(start, end);
+    
+        // Assert
+        Assert.Equal(new TimeSpan(18, 0, 0), businessHours);
+    }
+    
+    
+    [Theory]
+    [InlineData("2024-06-03 17:00:00", "2024-06-04 10:00:00")]
+    [InlineData("2024-06-04 17:00:00", "2024-06-05 10:00:00")]
+    [InlineData("2024-06-05 17:00:00", "2024-06-06 10:00:00")]
+    [InlineData("2024-06-06 17:00:00", "2024-06-07 10:00:00")]
+    [InlineData("2024-06-07 17:00:00", "2024-06-10 10:00:00")]
+    public void Should_Return_TwoHours_When_StartDay_IsMinorThan_EndDay_And_StartDayHour_IsGreaterThan_EndDayHour(DateTime start, DateTime end)
+    {
+        // Arrange
+        
+        // Act
+        var businessHours = CalculateBusinessHours(start, end);
+    
+        // Assert
+        Assert.Equal(new TimeSpan(2, 0, 0), businessHours);
+    }
+    
     
     private TimeSpan CalculateBusinessHours(DateTime start, DateTime end)
     {
@@ -93,14 +95,20 @@ public class UnitTest1
         var startHour = 0;
         var endHour = 0;
 
-        for (var date = start; date <= end; date = date.AddDays(1))
+        for (var date = start.Date; date <= end.Date; date = date.AddDays(1))
         {
             if (date.DayOfWeek != DayOfWeek.Saturday && date.DayOfWeek != DayOfWeek.Sunday)
             {
-                if (date.Date == start.Date || date.Date == end.Date)
+                if (date.Date == start.Date)
                 {
-                    startHour = start.Hour < 9 ? 9 : start.Hour;
-                    endHour = start.Hour < 18 ? 18 : end.Hour;
+                    startHour = start.Hour < 9 ? 9 : (start.Hour > 18 ? 18 : start.Hour);
+                    endHour = start.Date == end.Date ? (end.Hour > 18 ? 18 : (end.Hour < 9 ? 9 : end.Hour)) : 18;
+                    businessHours += new TimeSpan(endHour - startHour, 0, 0);
+                }
+                else if (date.Date == end.Date)
+                {
+                    startHour = 9;
+                    endHour = end.Hour > 18 ? 18 : (end.Hour < 9 ? 9 : end.Hour);
                     businessHours += new TimeSpan(endHour - startHour, 0, 0);
                 }
                 else
