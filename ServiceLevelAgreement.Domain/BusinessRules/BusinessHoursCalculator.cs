@@ -1,9 +1,16 @@
-﻿using ServiceLevelAgreement.Domain.Strategy;
+﻿using ServiceLevelAgreement.Domain.GangOfFour.Behavioral.Strategy;
 
-namespace ServiceLevelAgreement.Domain;
+namespace ServiceLevelAgreement.Domain.BusinessRules;
 
 public class BusinessHoursCalculator : ICalculatorStrategy
 {
+    /// <summary>
+    /// Returns the business hours between two dates
+    /// </summary>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException"></exception>
     public TimeSpan Calculate(DateTime start, DateTime end)
     {
         if (start > end)

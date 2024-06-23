@@ -1,4 +1,5 @@
 using Moq;
+using ServiceLevelAgreement.Domain.BusinessRules;
 
 namespace ServiceLevelAgreement.Domain.BusinessHours;
 

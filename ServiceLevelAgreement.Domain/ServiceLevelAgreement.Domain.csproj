@@ -6,4 +6,25 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Compile Remove="Strategy\Concrete\**" />
+      <Compile Remove="Strategy\Abstract\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Strategy\Concrete\**" />
+      <EmbeddedResource Remove="Strategy\Abstract\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Strategy\Concrete\**" />
+      <None Remove="Strategy\Abstract\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="GangOfFour\Behavioral\" />
+      <Folder Include="GangOfFour\Creational\" />
+      <Folder Include="GangOfFour\Structural\" />
+    </ItemGroup>
+
 </Project>

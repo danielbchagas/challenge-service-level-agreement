@@ -1,5 +1,6 @@
 ﻿using ServiceLevelAgreement.Domain;
-using ServiceLevelAgreement.Domain.Strategy;
+using ServiceLevelAgreement.Domain.BusinessRules;
+using ServiceLevelAgreement.Domain.GangOfFour.Behavioral.Strategy;
 
 Console.Write("Enter the start date (format YYYY-MM-DD HH:MM:SS): ");
 
@@ -26,7 +27,7 @@ if (!DateTime.TryParse(endDateInput, out endDate))
 }
 
 // Create a calculator using the business hours strategy
-var calculator = new CalculatorStrategy(new BusinessHoursCalculator());
+var calculator = new CalculatorStrategyContext(new BusinessHoursCalculator());
 
 // Calculate business hours difference
 TimeSpan result = calculator.Calculate(startDate, endDate);
